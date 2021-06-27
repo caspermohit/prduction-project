@@ -1,0 +1,113 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use App\ViewModels\ActorsViewModel;
+use App\ViewModels\ActorViewModel;
+
+class ActorsController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index($page=1)
+
+    {
+
+
+        $popularActors = Http::withToken("eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmY2E0MDBkYzdjMGRiMWY3OGNhNWRjNjc3NjI1NzA1ZSIsInN1YiI6IjYwOWRlYWIwMmNkZTk4MDA0MDQwNjc3ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.p5l5eeLroaVkekqY1JJdRTgFwzGONr_ti7Ql7oau1HI")
+        ->get('https://api.themoviedb.org/3/person/popular?page='.$page)
+        ->json()['results'];
+
+        $viewModel = new ActorsViewModel($popularActors, $page);
+        // dump($popularActors);
+
+        return view('actors.index', $viewModel);
+    }
+
+
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $actor = Http::withToken("eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmY2E0MDBkYzdjMGRiMWY3OGNhNWRjNjc3NjI1NzA1ZSIsInN1YiI6IjYwOWRlYWIwMmNkZTk4MDA0MDQwNjc3ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.p5l5eeLroaVkekqY1JJdRTgFwzGONr_ti7Ql7oau1HI")
+        ->get('https://api.themoviedb.org/3/person/'.$id)
+        ->json();
+
+    $social = Http::withToken("eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmY2E0MDBkYzdjMGRiMWY3OGNhNWRjNjc3NjI1NzA1ZSIsInN1YiI6IjYwOWRlYWIwMmNkZTk4MDA0MDQwNjc3ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.p5l5eeLroaVkekqY1JJdRTgFwzGONr_ti7Ql7oau1HI")
+        ->get('https://api.themoviedb.org/3/person/'.$id.'/external_ids')
+        ->json();
+
+    $credits = Http::withToken("eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmY2E0MDBkYzdjMGRiMWY3OGNhNWRjNjc3NjI1NzA1ZSIsInN1YiI6IjYwOWRlYWIwMmNkZTk4MDA0MDQwNjc3ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.p5l5eeLroaVkekqY1JJdRTgFwzGONr_ti7Ql7oau1HI")
+        ->get('https://api.themoviedb.org/3/person/'.$id.'/combined_credits')
+        ->json();
+
+    $viewModel = new ActorViewModel($actor, $social, $credits);
+
+    return view('actors.show', $viewModel);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+}

@@ -1,0 +1,7 @@
+fca400dc7c0db1f78ca5dc677625705e api key
+
+API Read Access Token (v4 auth)
+eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmY2E0MDBkYzdjMGRiMWY3OGNhNWRjNjc3NjI1NzA1ZSIsInN1YiI6IjYwOWRlYWIwMmNkZTk4MDA0MDQwNjc3ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.p5l5eeLroaVkekqY1JJdRTgFwzGONr_ti7Ql7oau1HI
+
+
+
